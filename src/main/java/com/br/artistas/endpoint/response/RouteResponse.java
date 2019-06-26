@@ -1,4 +1,4 @@
-//package com.br.artistas.spotify.endpoint.response;
+//package com.br.artistas.spotify.services.response;
 //
 //import com.andre.airfare.model.Route;
 //

@@ -1,4 +1,4 @@
-//package com.br.artistas.spotify.endpoint.request;
+//package com.br.artistas.spotify.services.request;
 //
 //import org.apache.commons.lang3.builder.ToStringBuilder;
 //

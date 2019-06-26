@@ -1,4 +1,4 @@
-package com.br.artistas.spotify;
+package com.br.artistas;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

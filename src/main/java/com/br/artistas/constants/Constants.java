@@ -1,4 +1,4 @@
-package com.br.artistas.spotify.constants;
+package com.br.artistas.constants;
 
 import java.time.format.DateTimeFormatter;
 

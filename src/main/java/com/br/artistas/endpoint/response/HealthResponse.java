@@ -1,4 +1,4 @@
-package com.br.artistas.spotify.endpoint.response;
+package com.br.artistas.endpoint.response;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;

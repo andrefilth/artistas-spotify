@@ -1,4 +1,4 @@
-package com.br.artistas.spotify;
+package com.br.artistas;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
