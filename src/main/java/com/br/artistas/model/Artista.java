@@ -1,12 +1,27 @@
 package com.br.artistas.model;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import java.util.List;
 
+@Document(collection = "Artista")
 public class Artista {
+
+    @Id
+    private String id;
 
     private String nome;
 
-    private List<Album> albuns;
+    private List<String> albuns;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getNome() {
         return nome;
@@ -16,11 +31,11 @@ public class Artista {
         this.nome = nome;
     }
 
-    public List<Album> getAlbuns() {
+    public List<String> getAlbuns() {
         return albuns;
     }
 
-    public void setAlbuns(List<Album> albuns) {
+    public void setAlbuns(List<String> albuns) {
         this.albuns = albuns;
     }
 }

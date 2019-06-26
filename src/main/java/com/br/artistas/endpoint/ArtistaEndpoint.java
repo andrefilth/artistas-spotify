@@ -1,6 +1,6 @@
 package com.br.artistas.endpoint;
 
-import com.br.artistas.constants.Constants;
+import com.br.artistas.endpoint.utils.ArtistaUtils;
 import com.br.artistas.exceptions.ArtistaNotFoundException;
 import com.br.artistas.services.ArtistaService;
 import com.br.artistas.endpoint.response.ArtistaResponse;
@@ -11,8 +11,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
+import java.util.List;
+
+import static com.br.artistas.constants.Constants.*;
+
 @RestController
-@RequestMapping(Constants.CONTEXT_PATH)
+@RequestMapping(CONTEXT_PATH)
 public class ArtistaEndpoint {
 
     private static final Logger LOG = LoggerFactory.getLogger(ArtistaEndpoint.class);
@@ -47,4 +51,16 @@ public class ArtistaEndpoint {
                 .map(ArtistaResponse::new)
                 .doOnSuccess(wr -> LOG.info("Coleção completa do artista [ {} ]", wr));
     }
+//
+//    @ResponseStatus(value = HttpStatus.OK)
+//    @GetMapping("/artista")
+//    public Mono<List<ArtistaResponse>> findAll() {
+//
+//        LOG.info("Buscando todos os artistas: [ {} ]");
+//
+//        return service.findAll()
+//                .switchIfEmpty(Mono.error(new ArtistaNotFoundException("artistas_validation",	"Informações não encontradas " )))
+//                .map(ArtistaUtils::toResponse)
+//                .doOnSuccess(wr -> LOG.info("Coleção completa do artista [ {} ]", wr));
+//    }
 }
