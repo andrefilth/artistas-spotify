@@ -14,17 +14,6 @@ public class ArtistaResponse {
     public ArtistaResponse(Artista artista) {
         this.nome = artista.getNome();
         this.albuns = artista.getAlbuns();
-//        this.albuns = artista.getAlbuns()
-//                .stream()
-//                .map(t -> {
-//                    if (t instanceof Album) {
-//                        return new AlbumResponse((Album) t);
-//                    } else {
-//                        throw new ArtistaInternalException("Invalid Response: " + t.getClass());
-//                    }
-//                })
-//                .distinct()
-//                .collect(toList());
 
     }
 

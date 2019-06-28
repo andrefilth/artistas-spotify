@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface ArtistaService {
 
-    Mono<Artista> find(String name);
+    Mono<Artista> findBy(String name);
 
     Mono<List<Artista>> findAll();
 }

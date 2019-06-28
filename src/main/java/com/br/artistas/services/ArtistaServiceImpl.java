@@ -27,7 +27,7 @@ public class ArtistaServiceImpl implements ArtistaService {
     }
 
     @Override
-    public Mono<Artista> find(String name) {
+    public Mono<Artista> findBy(String name) {
         return null;
     }
 

@@ -1,5 +1,6 @@
 package com.br.artistas.endpoint;
 
+import com.br.artistas.endpoint.request.ArtistaRequest;
 import com.br.artistas.endpoint.utils.ArtistaUtils;
 import com.br.artistas.exceptions.ArtistaNotFoundException;
 import com.br.artistas.services.ArtistaService;
@@ -42,12 +43,12 @@ public class ArtistaEndpoint {
 
     @ResponseStatus(value = HttpStatus.OK)
     @GetMapping("/artista")
-    public Mono<ArtistaResponse> find(@RequestParam(value = "nome") String nome) {
+    public Mono<ArtistaResponse> find(@RequestBody ArtistaRequest request) {
 
-        LOG.info("Buscando o artista NOME: [ {} ]", nome);
+        LOG.info("Buscando o artista NOME: [ {} ]", request.getNome());
 
-        return service.find(nome)
-                .switchIfEmpty(Mono.error(new ArtistaNotFoundException("artistas_validation",	"Informações não encontradas para o nome  " + nome)))
+        return service.findBy(request.getNome())
+                .switchIfEmpty(Mono.error(new ArtistaNotFoundException("artistas_validation",	"Informações não encontradas para o nome  " + request.getNome())))
                 .map(ArtistaResponse::new)
                 .doOnSuccess(wr -> LOG.info("Coleção completa do artista [ {} ]", wr));
     }
