@@ -9,10 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
-import javax.annotation.PostConstruct;
 import java.util.List;
-
-import static java.util.UUID.randomUUID;
+import java.util.Optional;
 
 @Service
 public class ArtistaServiceImpl implements ArtistaService {
@@ -27,8 +25,18 @@ public class ArtistaServiceImpl implements ArtistaService {
     }
 
     @Override
+    public Optional<Artista> findByNomeStartingWith(String name) {
+        return getByNomeStartingWith(name);
+
+    }
+
+    @Override
     public Mono<Artista> findBy(String name) {
-        return null;
+        return Mono.justOrEmpty(getByNomeStartingWith(name).get());
+    }
+
+    private Optional<Artista> getByNomeStartingWith(String name) {
+        return repository.findByNomeStartingWith(name).stream().findAny();
     }
 
     @Override
@@ -37,15 +45,10 @@ public class ArtistaServiceImpl implements ArtistaService {
         return Mono.justOrEmpty(artistas);
     }
 
-    @PostConstruct
-    public void Init() {
-
-        Artista sidney = new Artista();
-        sidney.setId(randomUUID().toString());
-        sidney.setNome("Sidney Magal");
-        sidney.setAlbuns(List.of("Baila Magal", "Coração Latino", "Vibrações"));
-        repository.save(sidney);
-
-//        repository.save(fernando);
+    @Override
+    public Mono<Artista> create(Artista artista) {
+        Artista save = repository.save(artista);
+        return Mono.justOrEmpty(save);
     }
+
 }

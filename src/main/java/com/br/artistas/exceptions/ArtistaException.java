@@ -20,19 +20,19 @@ public class ArtistaException extends RuntimeException {
         this.errorCode = errorCode;
     }
 
-//    public ArtistaException(int httpStatus, String errorCode, String description, Throwable cause) {
-//        super(description, cause);
-//        this.httpStatus = httpStatus;
-//        this.errorCode = errorCode;
-//
-//    }
-//
-//    public ArtistaException(int httpStatus, String errorCode, String description, Map<String, String> fields, Throwable cause) {
-//        super(description, cause);
-//        this.httpStatus = httpStatus;
-//        this.errorCode = errorCode;
-//        this.fields = fields;
-//    }
+    public ArtistaException(int httpStatus, String errorCode, String description, Throwable cause) {
+        super(description, cause);
+        this.httpStatus = httpStatus;
+        this.errorCode = errorCode;
+
+    }
+
+    public ArtistaException(int httpStatus, String errorCode, String description, Map<String, String> fields, Throwable cause) {
+        super(description, cause);
+        this.httpStatus = httpStatus;
+        this.errorCode = errorCode;
+        this.fields = fields;
+    }
 
     public int getHttpStatus() {
         return httpStatus;
