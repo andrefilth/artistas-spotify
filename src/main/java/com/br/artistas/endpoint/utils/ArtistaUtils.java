@@ -34,4 +34,15 @@ public class ArtistaUtils {
         return artista;
 
     }
+
+    public static Artista toUpdate(Artista model, ArtistaRequest request) {
+        if(request.getNome()!= null){
+            model.setNome(request.getNome());
+        }
+        if(request.getAlbuns().size()>0){
+            model.getAlbuns().addAll(request.getAlbuns());
+        }
+        return model;
+
+    }
 }

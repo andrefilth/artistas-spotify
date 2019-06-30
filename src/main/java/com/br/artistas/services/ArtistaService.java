@@ -1,6 +1,7 @@
 package com.br.artistas.services;
 
 
+import com.br.artistas.external.model.SpotifyResponse;
 import com.br.artistas.model.Artista;
 import reactor.core.publisher.Mono;
 
@@ -15,7 +16,13 @@ public interface ArtistaService {
 
     Mono<List<Artista>> findAll();
 
+    Mono<Artista> update(Artista artista);
+
+    Mono<Void> delete(Artista artista);
+
     Mono<Artista> create(Artista request);
 
     Mono<Artista> findByUuid(String uuid);
+
+    Mono<SpotifyResponse> token(String nome);
 }

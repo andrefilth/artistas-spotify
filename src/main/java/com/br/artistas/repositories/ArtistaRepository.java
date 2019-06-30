@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface ArtistaRepository extends MongoRepository<Artista,Long> {
+public interface ArtistaRepository extends MongoRepository<Artista,String> {
 
    List<Artista> findByNomeStartingWith(String nome);
 }

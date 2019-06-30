@@ -4,13 +4,13 @@ import com.br.artistas.types.SearchType;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
-import java.util.List;
+import java.util.Set;
 
 public class ArtistaRequest {
 
     private  String nome;
     private SearchType tipo;
-    private List<String> albuns;
+    private Set<String> albuns;
 
     public String getNome() {
         return nome;
@@ -28,11 +28,11 @@ public class ArtistaRequest {
         this.tipo = tipo;
     }
 
-    public List<String> getAlbuns() {
+    public Set<String> getAlbuns() {
         return albuns;
     }
 
-    public void setAlbuns(List<String> albuns) {
+    public void setAlbuns(Set<String> albuns) {
         this.albuns = albuns;
     }
 

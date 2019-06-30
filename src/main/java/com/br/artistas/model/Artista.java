@@ -1,9 +1,12 @@
 package com.br.artistas.model;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
+import java.util.Set;
 
 @Document(collection = "Artista")
 public class Artista {
@@ -13,7 +16,7 @@ public class Artista {
 
     private String nome;
 
-    private List<String> albuns;
+    private Set<String> albuns;
 
     public String getId() {
         return id;
@@ -31,11 +34,21 @@ public class Artista {
         this.nome = nome;
     }
 
-    public List<String> getAlbuns() {
+    public Set<String> getAlbuns() {
         return albuns;
     }
 
-    public void setAlbuns(List<String> albuns) {
+    public void setAlbuns(Set<String> albuns) {
         this.albuns = albuns;
+    }
+
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this, ToStringStyle.JSON_STYLE)
+                .append("id", id)
+                .append("nome", nome)
+                .append("albuns", albuns)
+                .build();
     }
 }

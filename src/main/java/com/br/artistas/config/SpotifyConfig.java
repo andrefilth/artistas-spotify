@@ -22,12 +22,15 @@ public class SpotifyConfig {
     @Value("${spotify.url.token}")
     private String urlToken;
 
-    @Bean
-    public void awsCredentialsProvider() {
-        if (accessKey != null) {
-            LOG.info("Spotify Configurado! " + urlToken);
-        }
-    }
+    @Value("${spotify.url}")
+    private String urlApi;
+
+//    @Bean
+//    public void awsCredentialsProvider() {
+//        if (accessKey != null) {
+//            LOG.info("Spotify Configurado! " + urlToken);
+//        }
+//    }
 
     public String getAccessKey() {
         return accessKey;
@@ -51,5 +54,13 @@ public class SpotifyConfig {
 
     public void setUrlToken(String urlToken) {
         this.urlToken = urlToken;
+    }
+
+    public String getUrlApi() {
+        return urlApi;
+    }
+
+    public void setUrlApi(String urlApi) {
+        this.urlApi = urlApi;
     }
 }

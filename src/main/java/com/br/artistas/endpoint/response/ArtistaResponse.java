@@ -5,6 +5,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ArtistaResponse {
 
@@ -15,7 +16,7 @@ public class ArtistaResponse {
     public ArtistaResponse(Artista artista) {
         this.id = artista.getId();
         this.nome = artista.getNome();
-        this.albuns = artista.getAlbuns();
+        this.albuns = artista.getAlbuns().stream().sorted().collect(Collectors.toList());
 
     }
 
