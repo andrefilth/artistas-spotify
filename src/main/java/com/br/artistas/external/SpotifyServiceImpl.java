@@ -40,7 +40,7 @@ public class SpotifyServiceImpl implements SpotifyService {
     @Override
     public Mono<SpotifyResponse> search(String nome) {
         String urlToken = String.format("%s/%s%s%s", config.getUrlApi(), "search","?q="+nome,"&type=artist");
-        LOG.info("Gerando token de autenticação ao serviço do Spotify [{}]", urlToken);
+        LOG.info("Buscando artista [{}]", urlToken);
         return getToken().flatMap(token->
                 client.get()
                       .uri(urlToken)
