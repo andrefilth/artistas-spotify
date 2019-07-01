@@ -3,12 +3,15 @@ package com.br.artistas.endpoint.utils;
 import com.br.artistas.endpoint.request.ArtistaRequest;
 import com.br.artistas.endpoint.response.ArtistaResponse;
 import com.br.artistas.exceptions.ArtistaInternalException;
+import com.br.artistas.external.model.Item;
 import com.br.artistas.model.Artista;
 
 import java.util.List;
+import java.util.Set;
 
 import static java.util.UUID.randomUUID;
 import static java.util.stream.Collectors.toList;
+import static java.util.stream.Collectors.toSet;
 
 public class ArtistaUtils {
 
@@ -44,5 +47,14 @@ public class ArtistaUtils {
         }
         return model;
 
+    }
+
+    public static Artista toResponse(String nome, List<Item> request) {
+        Artista artista = new Artista();
+        artista.setId(randomUUID().toString());
+        artista.setNome(nome);
+        Set<String> albuns = request.stream().map(Item::getName).collect(toSet());
+        artista.setAlbuns(albuns);
+        return artista;
     }
 }

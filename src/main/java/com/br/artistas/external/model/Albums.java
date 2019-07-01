@@ -1,23 +1,27 @@
 
 package com.br.artistas.external.model;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import com.fasterxml.jackson.annotation.JsonAnyGetter;
+import com.fasterxml.jackson.annotation.JsonAnySetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-import java.util.List;
-
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
-        "href",
-        "items",
-        "limit",
-        "next",
-        "offset",
-        "previous",
-        "total"
+    "href",
+    "items",
+    "limit",
+    "next",
+    "offset",
+    "previous",
+    "total"
 })
-public class Artists {
+public class Albums {
 
     @JsonProperty("href")
     private String href;
@@ -26,13 +30,15 @@ public class Artists {
     @JsonProperty("limit")
     private Integer limit;
     @JsonProperty("next")
-    private String next;
+    private Object next;
     @JsonProperty("offset")
     private Integer offset;
     @JsonProperty("previous")
-    private String previous;
+    private Object previous;
     @JsonProperty("total")
     private Integer total;
+    @JsonIgnore
+    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     @JsonProperty("href")
     public String getHref() {
@@ -65,12 +71,12 @@ public class Artists {
     }
 
     @JsonProperty("next")
-    public String getNext() {
+    public Object getNext() {
         return next;
     }
 
     @JsonProperty("next")
-    public void setNext(String next) {
+    public void setNext(Object next) {
         this.next = next;
     }
 
@@ -85,12 +91,12 @@ public class Artists {
     }
 
     @JsonProperty("previous")
-    public String getPrevious() {
+    public Object getPrevious() {
         return previous;
     }
 
     @JsonProperty("previous")
-    public void setPrevious(String previous) {
+    public void setPrevious(Object previous) {
         this.previous = previous;
     }
 
@@ -102,6 +108,16 @@ public class Artists {
     @JsonProperty("total")
     public void setTotal(Integer total) {
         this.total = total;
+    }
+
+    @JsonAnyGetter
+    public Map<String, Object> getAdditionalProperties() {
+        return this.additionalProperties;
+    }
+
+    @JsonAnySetter
+    public void setAdditionalProperty(String name, Object value) {
+        this.additionalProperties.put(name, value);
     }
 
 }

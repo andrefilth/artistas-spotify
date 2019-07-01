@@ -5,7 +5,6 @@ import com.br.artistas.endpoint.response.ArtistaResponse;
 import com.br.artistas.endpoint.utils.ArtistaUtils;
 import com.br.artistas.exceptions.ArtistaFoundException;
 import com.br.artistas.exceptions.ArtistaNotFoundException;
-import com.br.artistas.external.model.SpotifyResponse;
 import com.br.artistas.model.Artista;
 import com.br.artistas.services.ArtistaService;
 import org.slf4j.Logger;
@@ -15,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
+import java.util.List;
 import java.util.Optional;
 
 import static com.br.artistas.constants.Constants.CONTEXT_PATH;
@@ -34,14 +34,14 @@ public class ArtistaEndpoint {
     }
 
     @ResponseStatus(value = HttpStatus.FOUND)
-    @GetMapping("/spotify")
-    public Mono<SpotifyResponse> token(@RequestParam(value = "nome") String nome) {
+    @GetMapping("/artistas")
+    public Mono<List<ArtistaResponse>> findAll() {
 
-        LOG.info("Buscando nome: [ {} ]");
+        LOG.info("Buscando todos os artitas na base de dados");
 
-        return service.token(nome)
-//                .switchIfEmpty(Mono.error(new ArtistaNotFoundException("artistas_validation",	"Informações não encontradas para o nome  " + nome)))
-//                .map(ArtistaResponse::new)
+        return service.findAll()
+                .switchIfEmpty(Mono.error(new ArtistaNotFoundException("artistas_validation",	"Informações não encontradas")))
+                .map(c -> ArtistaUtils.toResponse(c))
                 .doOnSuccess(wr -> LOG.info("Coleção completa do artista [ {} ]", wr));
     }
 
@@ -53,6 +53,7 @@ public class ArtistaEndpoint {
 
         return service.findBy(nome)
                 .switchIfEmpty(Mono.error(new ArtistaNotFoundException("artistas_validation",	"Informações não encontradas para o nome  " + nome)))
+                .flatMap(artista -> service.create(artista))
                 .map(ArtistaResponse::new)
                 .doOnSuccess(wr -> LOG.info("Coleção completa do artista [ {} ]", wr));
     }
@@ -101,23 +102,5 @@ public class ArtistaEndpoint {
         }
         return Mono.justOrEmpty(artista.get());
     }
-//        return service.findBy(nome).map(c->{
-//            if(c.getNome().endsWith(nome)){
-//                return Mono.error(new ArtistaFoundException("artistas_validation",	"Já existe um artista cadastrado " ));
-//            }
-////            return Mono.justOrEmpty(c);
-//        }).map(Artista::);
-//    }
-//
-//    @ResponseStatus(value = HttpStatus.OK)
-//    @GetMapping("/artista")
-//    public Mono<List<ArtistaResponse>> findAll() {
-//
-//        LOG.info("Buscando todos os artistas: [ {} ]");
-//
-//        return service.findAll()
-//                .switchIfEmpty(Mono.error(new ArtistaNotFoundException("artistas_validation",	"Informações não encontradas " )))
-//                .map(ArtistaUtils::toResponse)
-//                .doOnSuccess(wr -> LOG.info("Coleção completa do artista [ {} ]", wr));
-//    }
+
 }
