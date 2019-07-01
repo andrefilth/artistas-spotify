@@ -2,10 +2,15 @@
 
 INTELIPOST - #DESAFIO Backend Developer
 
-# Primeiros passos
+artistas-spotify Desenvolvido com Java 11 e SpringWebFux
 
-O projeto possui um arquivo de Docker Compose. É necessário executar este arquivo antes de iniciar a execução do projeto.
-run docker-compose up
+Run Terminal
+** IMPORTANTE: Você deve instalar o Docker e o docker-compose ** JDK 11 ** Execute todos os comandos abaixo dentro do diretório raiz deste projeto
+./docker-compose up
+
+Build
+
+./gradlew build
 
 ## Verificando se a aplicação subiu.
 
