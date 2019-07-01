@@ -17,24 +17,23 @@ GET http://localhost:8081/musicas/v1/artistas
 
 ## Consultar por artista
 
-http://localhost:8081/musicas/v1/artista?nome=Wesley Safadão
+http://localhost:8081/musicas/v1/artista?nome=Xuxa
 
 ## Cadastrar um novo Artista na base
 
 POST http://localhost:8081/musicas/v1/artista
-{
+
     "nome": "Sidney Magal",
     "albuns": [
         "Baila Magal",
         "Coração Latino",
         "Vibrações"
     ]
-}
 
 ## Alterar um artista
 
 PUT http://localhost:8081/musicas/v1/artista/{uuid}
-{
+
   
     "albuns": [
         "Baila Magal",
@@ -42,7 +41,7 @@ PUT http://localhost:8081/musicas/v1/artista/{uuid}
         "Vibrações",
         "Loucuras de Amor"
     ]
-}
+
 ## Excluir um artista
 
 DELETE http://localhost:8081/musicas/v1/artista/{uuid}
