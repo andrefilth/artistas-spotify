@@ -9,7 +9,7 @@ public interface SpotifyService {
 
     Mono<ArtistAlbumSpotifyResponse> search(String nome);
 
-    Mono<SpotifyToken> getSpotifyToken();
-
-    Mono<ArtistSpotifyResponse> findArtists(String id);
+//    Mono<SpotifyToken> getSpotifyToken();
+//
+//    Mono<ArtistSpotifyResponse> findArtists(String id);
 }

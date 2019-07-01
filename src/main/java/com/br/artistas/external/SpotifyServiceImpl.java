@@ -3,7 +3,6 @@ package com.br.artistas.external;
 import com.br.artistas.config.SpotifyConfig;
 import com.br.artistas.external.exception.SpotifyException;
 import com.br.artistas.external.model.ArtistAlbumSpotifyResponse;
-import com.br.artistas.external.model.ArtistSpotifyResponse;
 import com.br.artistas.security.SpotifyToken;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -57,26 +56,8 @@ public class SpotifyServiceImpl implements SpotifyService {
         );
     }
 
-    @Override
-    public Mono<ArtistSpotifyResponse> findArtists(String id) {
-        String url = String.format("%s/%s%s", config.getUrlApi(), "artists","?ids="+id);
-        LOG.info("Buscando artista GET ID: [ {} ]", url);
-        return getToken().flatMap(token->
-                client.get()
-                        .uri(url)
-                        .header("Authorization", "Bearer " + token.getAccessToken())
-                        .exchange()
-//                        .timeout(Duration.ofSeconds(30))
-                        .flatMap(res->{
-                            if (res.statusCode().is2xxSuccessful()) {
-                                return res.bodyToMono(ArtistSpotifyResponse.class);
-                            }
-                            return Mono.error(new SpotifyException(500, "spotify_communication_error", "Falha de comunicação com os serviços da Spotify"));
-                        })
-        );
-    }
 
-    public Mono<SpotifyToken> getToken() {
+    private Mono<SpotifyToken> getToken() {
         String urlToken = config.getUrlToken();
         LOG.info("Gerando token de autenticação ao serviço do Spotify [{}]", urlToken);
         return client.post()
@@ -91,11 +72,6 @@ public class SpotifyServiceImpl implements SpotifyService {
                     }
                     return Mono.error(new SpotifyException(500, "spotify_communication_error", "Falha de comunicação com os serviços da Spotify - Token"));
                 });
-    }
-
-    @Override
-    public Mono<SpotifyToken> getSpotifyToken() {
-        return getToken();
     }
 
 }

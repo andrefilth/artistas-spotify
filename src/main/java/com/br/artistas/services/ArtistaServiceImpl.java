@@ -92,21 +92,17 @@ public class ArtistaServiceImpl implements ArtistaService {
         return spotifyService.search(nome)
                 .map(ArtistAlbumSpotifyResponse::getAlbums)
                 .map(Albums::getItems)
-//                .flatMap( c-> buscarAlbuns(c))
-//                .map(Artist::getItems)
-                //.flatMap(itens -> verificaNome(itens, nome))
-              //  .flatMap(id -> spotifyService.findArtists(id))
                 .doOnSuccess( c -> LOG.info("Coleção do artista encontrada: [ {} ] ", c));
     }
 
-    private Mono<String> verificaNome(List<Item> itens, String nome) {
-        Optional<Item> existeArtista = itens.stream().filter(c -> c.getName().equals(nome)).findFirst();
-        if (existeArtista.isPresent()){
-            return Mono.justOrEmpty(existeArtista.get().getId());
-        }else{
-            return Mono.empty();
-        }
-    }
+//    private Mono<String> verificaNome(List<Item> itens, String nome) {
+//        Optional<Item> existeArtista = itens.stream().filter(c -> c.getName().equals(nome)).findFirst();
+//        if (existeArtista.isPresent()){
+//            return Mono.justOrEmpty(existeArtista.get().getId());
+//        }else{
+//            return Mono.empty();
+//        }
+//    }
 
 
     private Optional<Artista> getByNomeStartingWith(String name) {
