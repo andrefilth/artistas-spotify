@@ -17,7 +17,7 @@ GET http://localhost:8081/musicas/v1/artistas
 
 ## Consultar por artista
 
-http://localhost:8081/musicas/v1/artista?nome=Xuxa
+GET http://localhost:8081/musicas/v1/artista?nome=Xuxa
 
 ## Cadastrar um novo Artista na base
 
